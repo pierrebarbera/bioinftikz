@@ -1,34 +1,6 @@
 \documentclass[beamer]{standalone}
 \usepackage{tikz}
-
-
-\newcount\tmpnum
-\def\storedata#1#2{\tmpnum=0 \edef\tmp{\string#1}\storedataA#2\end}
-\def\storedataA#1{\advance\tmpnum by1
-   \ifx\end#1\else
-      \expandafter\def\csname data:\tmp:\the\tmpnum\endcsname{#1}%
-      \expandafter\storedataA\fi
-}
-\def\getdata[#1]#2{\csname data:\string#2:#1\endcsname}
-
-\tikzset{
-   pics/phylo/.style = {
-   	background code={
-    	\draw  (0,1) --  (1,0) --  (0,-1);
-	\draw  (1,0) --  (3, 0) --  (4,-1);
-	\draw  (3,0) --  (4,1);
-	%mid-way label nodes
-	\node[above right] (lup) at  (.5,.5) {\getdata[1]#1};
-	\node[below right] (ldn) at  (.5,-.5) {\getdata[2]#1};
-	\node[above] (mid) at  (2,0) {\getdata[3]#1};
-	\node[below left] (rdn) at  (3.5,-.5) {\getdata[4]#1};
-	\node[above left] (rup) at  (3.5,.5) {\getdata[5]#1};
-		
-}}}
-\newcommand<>{\phylofig}[3]{
-\storedata\mylabels{#2}
-\pic#4[#3] at (#1) {phylo={\mylabels}};
-}
+\usepackage{../templates/phylofig}
 
 \begin{document}
 \begin{standaloneframe}
