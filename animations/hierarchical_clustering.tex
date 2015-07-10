@@ -1,0 +1,48 @@
+\documentclass[beamer]{standalone}
+\usepackage{../templates/common}
+\usepackage{../templates/phylofig}
+
+\begin{document}
+\begin{standaloneframe}
+\centering
+\begin{tikzpicture}
+	\draw (0,2) node(label) {Pairwise Distance Matrix (PWD)};
+    \onslide<3->{\draw (3,-2) node[align=center](mrg) {\textbf{merging} and\\ \textbf{branch length assignment}};}
+    \onslide<1-2>{\draw (0,0) node  {
+    	\begin{tabular}{c | c | c | c | c |}
+    		&A 	&B	&C	&D	\\
+    		\hline
+    		A& 	&17&21&27\\
+    		\hline
+    		B& 	&	&{\color<2>{red}12}&18\\
+    		\hline
+    		C& 	&	&	&14\\
+    		\hline
+    		D& 	&	&	&	\\
+    		\hline
+        	\end{tabular}};
+    }
+	
+	\onslide<3->{\draw (0,0) node  {
+    	\begin{tabular}{c | c | c | c |}
+			&A 	&X &D \\
+			\hline
+   			A& 	&13&27\\
+			\hline
+			X& 	&  &18\\
+			
+			\hline
+			D& 	&  &  \\
+			\hline
+		\end{tabular}};
+	}
+	\onslide<2->{
+	\draw (3,-1) node(b) {B};
+	\draw (4.5,-1) node(c) {C};}
+	\onslide<3->{
+	\draw (3.75,0) node(x) {X};
+	\path[thick] (b) edge node[above left] {6} (x) ;
+	\path[thick] (c) edge node[above right] {6} (x);}
+\end{tikzpicture}
+\end{standaloneframe}
+\end{document}

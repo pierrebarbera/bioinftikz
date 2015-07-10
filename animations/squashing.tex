@@ -1,0 +1,29 @@
+\documentclass[beamer]{standalone}
+\usepackage{../templates/common}
+\usepackage{../templates/phylofig}
+
+\begin{document}
+\begin{standaloneframe}
+\centering
+\begin{tikzpicture}
+\only<1>{
+\node(sq) at (6,0) {Sample 1};
+\node(sq) at (6,-2.2) {Sample 2};
+\phylofig{0,-2.2}{ {0.1}{0.5}{0.1}{0.2}{0.1} }{}
+}
+
+\only<1-3>{\phylofig{0,0}{ {0.3}{\color<3>{red}0.4}{0.1}{0.2}{0.0} }{green}}
+\only<2-3>{\phylofig{0,-.4}{ {0.1}{\color<3>{red}0.5}{0.1}{0.2}{0.1} }{}}
+
+\only<4>{
+\phylofig{0,0}{ {0.2}{0.45}{0.1}{0.2}{0.05} }{}
+\phylofig{0,-.2}{ { }{ }{ }{ }{ } }{}
+}
+\onslide<2-3>{
+\draw [thick,red, ->] (5,1) -- (5,-1);
+\draw [thick,red, ->] (5.2,-1.4) -- (5.2,.6);
+\node [red](sq) at (6.5,0) {SQUASH!};}
+\onslide<3>{\node[red](sq) at (2,-1.75) {$(0.4+0.5)/2 = 0.45$};}
+\end{tikzpicture}
+\end{standaloneframe}
+\end{document}

@@ -1,0 +1,64 @@
+\documentclass[beamer]{standalone}
+\usepackage{../templates/common}
+\usepackage{../templates/phylofig}
+
+\usepackage{pifont}
+
+\newcommand{\cmark}{\ding{51}}%
+
+\begin{document}
+\begin{standaloneframe}
+\centering
+\begin{tikzpicture}
+    \draw (0,1) -- (1,0) -- (0,-1);
+    \draw (1,0) -- (3, 0) -- (4,-1);
+    \draw (3,0) -- (4,1);
+    
+    \draw (8,0) node  {
+    
+	\begin{tabular}{l}
+		\textbf{16S Sequences}\\
+    		{\color<1-6>{red}\texttt{AACGTA }\onslide<6->{\cmark ($<middle>$)}}\\
+    		{\color<7->{red}\texttt{TTATCC}}\\
+    		\texttt{GATACA}\\
+    		\texttt{TGATAT}\\
+	\end{tabular}};
+\node (seq) at (6.2,0.5) {};    
+\node (seq2) at (6.2,0) {};
+
+\node (1) at (3.5,0.5) {};
+\node (2) at (3.5,-0.5) {};
+\node (3) at (2,0) {};
+\node (4) at (.5,.5) {};
+\node (5) at (.5,-.5) {};
+
+\path<1>[every node/.style={font=\sffamily\small}, ->, red]
+(seq) edge node [right, above] {?} (1);
+\draw<1>[red] (3.5, 0.5) -- (3,1);
+
+\path<2>[every node/.style={font=\sffamily\small}, ->, red]
+(seq) edge node [right, below] {?} (2);
+\draw<2>[red] (3.5,-0.5) -- (3,-1);
+
+\path<3>[every node/.style={font=\sffamily\small}, ->, red]
+(seq) edge node [ above] {?} (3);
+\draw<3,6>[red] (2,0) -- (2,1);
+
+\path<4>[every node/.style={font=\sffamily\small}, ->, red]
+(seq) edge node [right, below] {?} (4);
+\draw<4>[red] (.5,.5) -- (1,1);
+
+\path<5>[every node/.style={font=\sffamily\small}, ->, red]
+(seq) edge node [right, below] {?} (5);
+\draw<5>[red] (.5,-.5) -- (1,-1);
+
+\path<7>[every node/.style={font=\sffamily\small}, ->, red]
+(seq2) edge node [right, above] {?} (1);
+\draw<7>[red] (3.5, 0.5) -- (3,1);
+
+\path<8>[every node/.style={font=\sffamily\small}, ->, red]
+(seq2) edge node [right, below] {?} (2);
+\draw<8>[red] (3.5,-0.5) -- (3,-1);
+\end{tikzpicture}
+\end{standaloneframe}
+\end{document}
