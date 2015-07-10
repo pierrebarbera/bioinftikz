@@ -1,0 +1,75 @@
+\documentclass[beamer]{standalone}
+\usepackage{tikz}
+
+
+\newcount\tmpnum
+\def\storedata#1#2{\tmpnum=0 \edef\tmp{\string#1}\storedataA#2\end}
+\def\storedataA#1{\advance\tmpnum by1
+   \ifx\end#1\else
+      \expandafter\def\csname data:\tmp:\the\tmpnum\endcsname{#1}%
+      \expandafter\storedataA\fi
+}
+\def\getdata[#1]#2{\csname data:\string#2:#1\endcsname}
+
+\tikzset{
+   pics/phylo/.style = {
+   	background code={
+    	\draw  (0,1) --  (1,0) --  (0,-1);
+	\draw  (1,0) --  (3, 0) --  (4,-1);
+	\draw  (3,0) --  (4,1);
+	%mid-way label nodes
+	\node[above right] (lup) at  (.5,.5) {\getdata[1]#1};
+	\node[below right] (ldn) at  (.5,-.5) {\getdata[2]#1};
+	\node[above] (mid) at  (2,0) {\getdata[3]#1};
+	\node[below left] (rdn) at  (3.5,-.5) {\getdata[4]#1};
+	\node[above left] (rup) at  (3.5,.5) {\getdata[5]#1};
+		
+}}}
+\newcommand<>{\phylofig}[3]{
+\storedata\mylabels{#2}
+\pic#4[#3] at (#1) {phylo={\mylabels}};
+}
+
+\begin{document}
+\begin{standaloneframe}
+\begin{tikzpicture}
+\node(sq) at (2,1.5) {Sample 1};
+\node(sq) at (7,1.5) {Sample 2};
+
+\phylofig{0,0}{ 
+{\only<1>{0.3}\only<2->{\color<2>{red}0.1}}
+{\only<1-2>{0.4}\only<3->{\color<3>{red}0.5}}
+{\color<4>{red}0.1}
+{\color<5>{red}0.2}
+{\only<1-5>{0.0}\only<6->{\color<6>{red}0.1}} 
+}{}
+
+\phylofig{5,0}{ {0.1}{0.5}{0.1}{0.2}{0.1} }{}
+\node at (4.5,0) {\Large $\Rightarrow$};
+
+\node (ao) at (0,0.9) {};
+\node (bo) at (0,-0.9) {};
+\node (bi) at (0.1,-1) {};
+\node (co) at (4,-0.9) {};
+    \node (ci) at (3.9,-1) {};
+\node (do) at (4,0.9) {};
+\node (xo) at (0.9,0) {};
+\node (yo) at (3.1,0) {};
+\node (xi) at (1,-0.1) {};
+\node (yi) at (3,-0.1) {};
+
+\onslide<2->{\path (ao) edge[red, ->] node[below left] {+0.2} (xo);}
+\onslide<3->{
+\path (xo) edge[red, ->] node[above left] {+0.1} (bo);
+\path (bi) edge[red, ->] node[] {} (xi);}
+\onslide<4->{\path<4-> (xi) edge[red, ->] node[below] {+0.1} (yi);}
+\onslide<5->{
+\path (yi) edge[red, ->] node[] {} (ci);
+\path (co) edge[red, ->] node[above right] {+0.1} (yo);}
+\onslide<6->{\path (yo) edge[red, ->] node[below right] {+0.1} (do);}
+
+\onslide<6>{\node at (4.5,-2) {\Large Distance = 0.6};}
+
+\end{tikzpicture}
+\end{standaloneframe}
+\end{document}
