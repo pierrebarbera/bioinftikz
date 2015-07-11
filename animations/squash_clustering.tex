@@ -15,9 +15,11 @@
 \node (a) at (2,1) {};
 \node (b) at (10,1) {};
 \node (x) at (6,4) {};
-\path (a) edge[thick] node[above left] {0.3} (x);
-\path (b) edge[thick] node[above right] {0.3}(x);
+\path (a) edge[thick] node[above left] {\only<3>{\textbf{0.3}}} (x);
+\path (b) edge[thick] node[above right] {\only<3>{\textbf{0.3}}}(x);
 }
+\onslide<2>{\node(mrg) at (6,2) {\textbf{merge step}};}
+\onslide<3>{\node at (6,2) [align=center,text width=3cm]{\textbf{assign branch lengths\\  (K-R Distance)}};}
 \end{tikzpicture}
 \end{standaloneframe}
 \end{document}
