@@ -13,11 +13,11 @@
 {\only<1>{0.3}\only<2->{\color<2>{red}0.1}}
 {\only<1-2>{0.4}\only<3->{\color<3>{red}0.5}}
 {\color<4>{red}0.1}
-{\color<5>{red}0.2}
-{\only<1-5>{0.0}\only<6->{\color<6>{red}0.1}} 
+{\only<1-4>{0.0}\only<5>{\color{red}0.1}\only<6->{0.1}}
+{\color<6>{red}0.2} 
 }{}
 
-\phylofig{5,0}{ {0.1}{0.5}{0.1}{0.2}{0.1} }{}
+\phylofig{5,0}{ {0.1}{0.5}{0.1}{0.1}{0.2} }{}
 \node at (4.5,0) {\Large $\Rightarrow$};
 
 \node (ao) at (0,0.9) {};
@@ -39,9 +39,9 @@
 \onslide<5->{
 \path (yi) edge[red, ->] node[] {} (ci);
 \path (co) edge[red, ->] node[above right] {+0.1} (yo);}
-\onslide<6->{\path (yo) edge[red, ->] node[below right] {+0.1} (do);}
+\onslide<6->{\path (yo) edge[red, ->] node[below right] {} (do);}
 
-\onslide<6>{\node at (4.5,-2) {\Large Distance = 0.6};}
+\onslide<6>{\node at (4.5,-2) {\Large Distance = 0.5};}
 
 \end{tikzpicture}
 \end{standaloneframe}
