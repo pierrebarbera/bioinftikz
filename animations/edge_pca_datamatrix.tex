@@ -1,0 +1,40 @@
+\documentclass[beamer]{standalone}
+\usepackage{../templates/common}
+\usepackage{../templates/phylofig}
+
+\begin{document}
+\begin{standaloneframe}
+\begin{tikzpicture}
+\phylofig{0,0}{ {\color<4>{red}0.3}
+{\color<3>{red}0.4}
+{\color<3>{red}0.1}
+{\color<3>{red}0.2}
+{\color<3>{red}0.0} }{}
+
+\node at (6,-1.5) {\textbf{Datamatrix}};
+\node at (2,1.5) {\textbf{Sample 1}};
+
+\draw (6,-3) node  {
+    
+	\begin{tabular}{r | c | c | c | c | c}
+		Sample&Edge 1&Edge 2&Edge 3&Edge 4&Edge 5\\
+		\hline
+    		1&\onslide<5->{\color<5>{red}0.4}&\onslide<6->{\color<6>{red}0.2}&\onslide<7->{\color<7>{red}-0.4}&\onslide<7->{\color<7>{red}\ldots}&\\
+    		2&&&&&\\
+    		3&&&&&\\
+    		4&&&&&\\
+	\end{tabular}};
+\node[green] (r) at (lcn) {\textbullet};
+\node[green, left] (r) at (lcn) {Root};
+\path<2-5> (lup.center) edge[-, red] (lcn.center);
+\path<6> (ldn.center) edge[-, red] (lcn.center);
+\path<7> (lcn.center) edge[-, red] (rcn.center);
+\node at (7,0) {
+$\onslide<3-5>{\color<3>{red}(0.1 + 0.4 + 0.2 + 0.0 )}
+\onslide<4-5>{\color<4>{red} - 0.3 = 0.4}$
+};
+\node at (7,0) {$\onslide<6>{\color{red}(0.1 + 0.3 + 0.2 + 0.0 ) - 0.4 = 0.2}$};
+\node at (7,0) {$\onslide<7>{\color{red}(0.1  + 0.2 + 0.0 ) - (0.4 + 0.3) = -0.4}$};
+\end{tikzpicture}
+\end{standaloneframe}
+\end{document}

@@ -12,15 +12,20 @@
 \tikzset{
    pics/phylo/.style = {
    	background code={
-    	\draw  (0,1) --  (1,0) --  (0,-1);
-	\draw  (1,0) --  (3, 0) --  (4,-1);
-	\draw  (3,0) --  (4,1);
-	%mid-way label nodes
-	\node[above right] (lup) at  (.5,.5) {\getdata[1]#1};
-	\node[below right] (ldn) at  (.5,-.5) {\getdata[2]#1};
-	\node[above] (mid) at  (2,0) {\getdata[3]#1};
-	\node[below left] (rdn) at  (3.5,-.5) {\getdata[4]#1};
-	\node[above left] (rup) at  (3.5,.5) {\getdata[5]#1};
+	
+	\node (lup) at (0,1) {};
+	\node (ldn) at (0,-1) {};
+	\node (lcn) at (1,0) {};
+	\node (rcn) at (3,0) {};
+	\node (rdn) at (4,-1) {};
+	\node (rup) at (4,1) {};
+	
+	\path
+	(lup.center) edge[-] node[above right, pos=0.5] {\getdata[1]#1} (lcn.center)
+	(ldn.center) edge[-] node[below right, pos=0.5] {\getdata[2]#1} (lcn.center)
+	(lcn.center) edge[-] node[above, pos=0.5] {\getdata[3]#1} (rcn.center)
+	(rcn.center) edge[-] node[below left, pos=0.5] {\getdata[4]#1} (rdn.center)
+	(rcn.center) edge[-] node[above left, pos=0.5] {\getdata[5]#1} (rup.center);
 		
 }}}
 \newcommand<>{\phylofig}[3]{
